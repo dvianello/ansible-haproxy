@@ -1,6 +1,5 @@
 ---
 # defaults file for haproxy
-haproxy_manage_config: true
 haproxy_global:
   log:
     - address: /dev/log
@@ -45,4 +44,3 @@ haproxy_defaults:
       - code: 502
         file: /etc/haproxy/errors/502.http
       - code: 504
-        file: /etc/haproxy/errors/504.http
