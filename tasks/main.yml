@@ -3,3 +3,8 @@
 
 - include: configure.yml
   when: haproxy_manage_config
+
+###
+# CentOS system - Enable Haproxy logging
+###
+- include: logging.yml
