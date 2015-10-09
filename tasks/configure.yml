@@ -82,5 +82,5 @@
   assemble: src={{ etc_prefix }}/haproxy/userlists.d dest={{ etc_prefix }}/haproxy/compiled/06-userlists.cfg
 
 - name: 'Assemble the final configuration file'
-  assemble: src={{ etc_prefix }}/haproxy/compiled dest={{ config_location }} backup=yes
+  assemble: src={{ etc_prefix }}/haproxy/compiled dest={{ config_location }} backup=yes delimiter=' '
   notify: restart haproxy
