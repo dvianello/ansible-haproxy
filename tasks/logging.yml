@@ -1,0 +1,34 @@
+---
+- name: Enable rsyslog imudp module
+  lineinfile: dest=/etc/rsyslog.conf
+              regexp="^#?\$ModLoad imudp"
+              line="$ModLoad imudp"
+              state=present
+  notify:
+    - restart rsyslog
+
+- name: Set rsyslog UDP port
+  lineinfile: dest=/etc/rsyslog.conf
+              regexp="#?\$UDPServerRun"
+              line="$UDPServerRun 514"
+              state=present
+  notify:
+    - restart rsyslog
+
+- name: Limit listening to localhost
+  lineinfile: dest=/etc/rsyslog.conf
+              regexp="#?\$UDPServerAddress"
+              line="$UDPServerAddress 127.0.0.1"
+              insertbefore="\$UDPServerRun"
+              state=present
+  notify:
+    - restart rsyslog
+
+- name: Update haproxy.d file
+  lineinfile: dest=/etc/rsyslog.d/haproxy.conf
+              regexp="local"
+              line="local2.*    /var/log/haproxy.log"
+              create=true
+              state=present
+  notify:
+    - restart rsyslog
