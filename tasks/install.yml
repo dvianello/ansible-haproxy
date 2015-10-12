@@ -74,3 +74,14 @@
 - name: 'Ensure chroot directory exists'
   file: name={{ haproxy_global.chroot }} state=directory
   when: haproxy_global.chroot is defined and haproxy_global.chroot
+
+###
+# SSL termination
+###
+- name: Set ssl certificate folder permissions
+  file: path=/etc/ssl/private state=directory mode=700 owner=root group=root
+  when: haproxy_ssl_certificates is defined and haproxy_ssl_certificates
+
+- name: 'Copy SSL pem file'
+  copy: src="{{haproxy_ssl_pem_path}}" dest=/etc/ssl/private/ mode=600 owner=root group=root
+  when: haproxy_ssl_certificates is defined and haproxy_ssl_certificates and haproxy_ssl_pem_path is defined
