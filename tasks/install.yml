@@ -3,26 +3,32 @@
 - name: 'Set CentOS directory prefix'
   set_fact: etc_prefix=/etc
   when: ansible_os_family == "RedHat"
+  tags: ['haproxy_configuration']
 
 - name: 'Set CentOS haproxy config location'
   set_fact: config_location=/etc/haproxy/haproxy.cfg
   when: ansible_os_family == "RedHat"
+  tags: ['haproxy_configuration']
 
 - name: 'Set SmartOS etc prefix'
   set_fact: etc_prefix=/opt/local/etc
   when: ansible_os_family == "Solaris"
+  tags: ['haproxy_configuration']
 
 - name: 'Set SmartOS haproxy config location'
   set_fact: config_location=/opt/local/etc/haproxy.cfg
   when: ansible_os_family == "Solaris"
+  tags: ['haproxy_configuration']
 
 - name: 'Set Debian/Ubuntu directory prefix'
   set_fact: etc_prefix=/etc
   when: ansible_os_family == "Debian"
+  tags: ['haproxy_configuration']
 
 - name: 'Set Debian/Ubuntu haproxy config location'
   set_fact: config_location=/etc/haproxy/haproxy.cfg
   when: ansible_os_family == "Debian"
+  tags: ['haproxy_configuration']
 
 ## PACKAGE INSTALL
 
